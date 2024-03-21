@@ -3,7 +3,7 @@
 **Description:**
 
 This is the backend for the todo app which implements functionality to 
-* log in/sign up *
+* log in/sign up 
 * create tasks and update tasks
 * trigger corn job for sending email reminders for over due tasks. Cron job is scheduled to run every 15 minutes for any over due task past 3 hours.
 
