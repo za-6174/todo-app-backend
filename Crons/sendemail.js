@@ -58,14 +58,19 @@ function getReminderHtmlTemplate(task) {
 }
 
 async function checkForOverDues() {
-    var tasks = await getTasksWithoutReminders();
-    for (const task of tasks) {
-        const user = task.user[0];
-        const isOverdue = task.adjustedDueDate < new Date()
-        if (isOverdue) {
-            await TaskModel.updateReminderForTask(task._id)
-            SendEmail(user.email, user.name, task);
+    try {
+        var tasks = await getTasksWithoutReminders();
+        for (const task of tasks) {
+            const user = task.user[0];
+            const isOverdue = task.adjustedDueDate < new Date()
+            if (isOverdue) {
+                await TaskModel.updateReminderForTask(task._id)
+                SendEmail(user.email, user.name, task);
+            }
         }
+    }
+    catch(err) {
+        console.log(err)
     }
 }
 

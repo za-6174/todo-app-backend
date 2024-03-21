@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const authRoutes = require("./Routes/AuthRoutes");
+const authRoutes = require("./Routes/AppRoutes");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cron = require('node-cron');
@@ -27,8 +27,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoutes)
 
-// ===== scheduling cron jobs
-cron.schedule('* * * * *', () => {
-    console.log("checking cron job")
+// ===== scheduling cron jobs to run every 15 minutes
+cron.schedule('*/15 * * * *', () => {
     checkForOverDues()
 });
