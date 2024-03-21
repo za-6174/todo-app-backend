@@ -40,10 +40,48 @@ taskSchema.statics.getTasksByUser = async function(userId) {
 
 taskSchema.statics.getTaskById = async function(_id) {
     const task = await this.findOne({_id})
-    console.log(task)
     if (task)
         return task;
     return null;
+}
+
+taskSchema.statics.updateReminderForTask = async function(_id) {
+    const task = await this.findByIdAndUpdate(_id, { isReminderSent: true })
+    return task;
+}
+
+taskSchema.statics.getTasksWithoutReminders = async function() {
+    const tasks = await this.aggregate([
+        {
+            $match: {
+                isReminderSent: false
+            }
+        },
+        {
+            $addFields: {
+                adjustedDueDate: { $add: ["$dueDate", 3 * 60 * 60 * 1000] } // Adding 3 hours (in milliseconds)
+            }
+        },
+        {
+            $match: {
+                adjustedDueDate: { $lt: new Date() } // Compare with current date
+            }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'user',
+                foreignField: '_id',
+                as: 'user'
+            }
+        }
+    ]);
+    return tasks;
+}
+
+taskSchema.statics.setReminderSentForTasks = async function (tasks) {
+    const updatePromises = tasks.map(task => task.updateOne({ isReminderSent: true }));
+    await Promise.all(updatePromises);
 }
 
 module.exports = mongoose.model("Tasks", taskSchema); 

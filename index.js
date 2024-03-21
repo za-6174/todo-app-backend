@@ -5,7 +5,8 @@ const authRoutes = require("./Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cron = require('node-cron');
-const sendEmail = require("./Crons/sendemail");
+
+const checkForOverDues = require("./Crons/sendemail");
 
 app.listen(4000, () => {
     console.log("Server started on port 4000");
@@ -28,5 +29,6 @@ app.use("/", authRoutes)
 
 // ===== scheduling cron jobs
 cron.schedule('* * * * *', () => {
-    sendEmail()
+    console.log("checking cron job")
+    checkForOverDues()
 });

@@ -58,3 +58,12 @@ module.exports.deleteTask = async (req, res, next) => {
         res.status(500).json({ message: "Something went wrong", success: false });
     }
 }
+
+module.exports.getTasksWithoutReminders = async (req, res, next) => {
+    try {
+        const tasks = await TaskModel.getTasksWithoutReminders();
+        return tasks;
+    } catch (err) {
+        return res.status(500).json({ message: "Something went wrong", success: false });
+    }
+}

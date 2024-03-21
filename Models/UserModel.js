@@ -38,5 +38,10 @@ userSchema.statics.login = async function(email, password) {
         throw Error("Incorrect email");
     }
 }
+
+userSchema.statics.getUserById = async function(id) {
+    const user = await this.findOne({_id: id})
+    return user;
+}
     
 module.exports = mongoose.model("Users", userSchema); 
