@@ -14,7 +14,7 @@ mongoose.connect("mongodb://0.0.0.0:27017/todo", {
     console.log("DB Connection successfull");
 }).catch(err => console.log("Error:" + err.message));
 
-app.use(cors({
+app.use(cors({  
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
     credentials: true

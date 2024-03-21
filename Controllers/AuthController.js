@@ -35,7 +35,7 @@ const handleErrors = (err) => {
 }
 
 module.exports.register = async (req, res, next) => {
-    try {
+    // try {
         const {name, email, password} = req.body;
         const user = await UserModel.create({name, email, password});
         const token = createToken(user._id);
@@ -45,11 +45,11 @@ module.exports.register = async (req, res, next) => {
             maxAge: maxAge*1000
         })
         res.status(201).json({user: {id: user._id, email: user.email, name: user.name }, created: true})
-    }
-    catch(err) {
-        const errors = handleErrors(err)
-        res.json({errors, created: false})
-    }
+    // }
+    // catch(err) {
+    //     const errors = handleErrors(err)
+    //     res.json({errors, created: false})
+    // }
 }
 
 module.exports.login = async (req, res, next) => {
