@@ -17,7 +17,7 @@ This is the backend for the todo app which implements functionality to log in/si
 
 2. **Clone the Repository:**
    ```bash
-   git clone https://github.com/za-6174/todo-app.git
+   git clone https://github.com/za-6174/todo-app-backend.git
 3. Install packages
    ```bash
    npm install  # or yarn install
