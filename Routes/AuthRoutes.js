@@ -12,7 +12,7 @@ router.post("/logout", logout);
 
 // Task Routes
 router.get("/tasks/:userId", getTasksByUser);
-router.get("/deletetask/:taskId", deleteTask);
+router.post("/deletetask", deleteTask);
 router.post("/tasks", updateTask);
 
 module.exports = router;

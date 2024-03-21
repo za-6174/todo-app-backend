@@ -41,5 +41,5 @@ taskSchema.statics.getTaskById = async function(_id) {
         return task;
     return null;
 }
-    
+
 module.exports = mongoose.model("Tasks", taskSchema); 

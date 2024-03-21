@@ -48,7 +48,7 @@ module.exports.updateTask = async(req, res, next) => {
 
 module.exports.deleteTask = async (req, res, next) => {
     try {
-        const taskId = req.params.taskId; 
+        const {taskId} = req.body; 
         const deletedTask = await TaskModel.findByIdAndDelete(taskId);
         if (!deletedTask) {
             return res.status(400).json({ success: false, message: "Task not found" });
