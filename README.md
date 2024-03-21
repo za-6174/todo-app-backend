@@ -6,7 +6,7 @@ This is the backend for the todo app which implements functionality to log in/si
 
 **Technologies:**
 
-* MongoDB Atlas (Cloud-based Database)
+* MongoDB Atlas (Cloud-based Database). Note: This project already contains my atlas database configurations to easily run without any need to download mongodb locally. 
 * Express.js (Backend Framework)
 * Node.js (JavaScript Runtime Environment)
 
@@ -24,3 +24,5 @@ This is the backend for the todo app which implements functionality to log in/si
 4. Run it
    ```bash
    npm start # or yarn start
+
+Note: .env file should never be pushed on github but since this project is meant for testing purposes, I have included .env to minimize the efforts to run the application.
