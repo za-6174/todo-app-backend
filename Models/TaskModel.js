@@ -10,6 +10,10 @@ const taskSchema = new mongoose.Schema({
         type: Date,
         required: [true, "Due Date is required"]
     },
+    isReminderSent: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date, default: new Date()
     },
