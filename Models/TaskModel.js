@@ -33,5 +33,13 @@ taskSchema.statics.getTasksByUser = async function(userId) {
     const tasks = await this.find({user: userId});
     return tasks;
 } 
+
+taskSchema.statics.getTaskById = async function(_id) {
+    const task = await this.findOne({_id})
+    console.log(task)
+    if (task)
+        return task;
+    return null;
+}
     
 module.exports = mongoose.model("Tasks", taskSchema); 
