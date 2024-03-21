@@ -14,6 +14,10 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isDone: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date, default: new Date()
     },
@@ -47,6 +51,15 @@ taskSchema.statics.getTaskById = async function(_id) {
 
 taskSchema.statics.updateReminderForTask = async function(_id) {
     const task = await this.findByIdAndUpdate(_id, { isReminderSent: true })
+    return task;
+}
+
+taskSchema.statics.markTaskStatus = async function(_id) {
+    const task = await this.findOne({_id})
+    if (task) {
+        task.isDone = !task.isDone
+        await task.save()
+    }
     return task;
 }
 

@@ -59,6 +59,20 @@ module.exports.deleteTask = async (req, res, next) => {
     }
 }
 
+module.exports.markTaskStatus = async (req, res, next) => {
+    try {
+        const {taskId} = req.body; 
+        const updatedTask = await TaskModel.markTaskStatus(taskId);
+        if (!updatedTask) {
+            return res.status(400).json({ success: false, message: "Task not found" });
+        }
+        res.status(200).json({ success: true, message: "Marked successfully", data: updatedTask });
+    } catch (err) {
+        res.status(500).json({ message: "Something went wrong", success: false });
+    }
+}
+
+
 module.exports.getTasksWithoutReminders = async (req, res, next) => {
     try {
         const tasks = await TaskModel.getTasksWithoutReminders();

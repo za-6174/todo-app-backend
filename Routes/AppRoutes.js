@@ -1,5 +1,5 @@
 const { register, login, logout } = require("../Controllers/AuthController");
-const { getTasksByUser, updateTask, deleteTask } = require("../Controllers/TaskController");
+const { getTasksByUser, updateTask, deleteTask, markTaskStatus } = require("../Controllers/TaskController");
 const { checkUser } = require("../Middlewares/AuthMiddleware");
 
 const router = require("express").Router();
@@ -14,5 +14,6 @@ router.post("/logout", logout);
 router.get("/tasks/:userId", getTasksByUser);
 router.post("/deletetask", deleteTask);
 router.post("/tasks", updateTask);
+router.post("/marktask", markTaskStatus)
 
 module.exports = router;
