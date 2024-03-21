@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const authRoutes = require("./Routes/AuthRoutes");
 const cookieParser = require("cookie-parser");
 const app = express();
+const cron = require('node-cron');
+const sendEmail = require("./Crons/sendemail");
 
 app.listen(4000, () => {
     console.log("Server started on port 4000");
 });
 
-mongoose.connect("mongodb://0.0.0.0:27017/todo", {
+mongoose.connect("mongodb+srv://zainab:mongo_123@cluster0.7xqsohr.mongodb.net/todo", {
 }).then(() => {
     console.log("DB Connection successfull");
 }).catch(err => console.log("Error:" + err.message));
@@ -23,3 +25,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", authRoutes)
+
+// ===== scheduling cron jobs
+cron.schedule('* * * * *', () => {
+    sendEmail()
+});
