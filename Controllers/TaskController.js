@@ -34,7 +34,7 @@ module.exports.updateTask = async(req, res, next) => {
             isAdd = true
         }
         else {
-            dbTask.name = task.taskName;
+            dbTask.taskName = task.taskName;
             dbTask.dueDate = task.dueDate;
             await dbTask.save();
         }
